@@ -1,0 +1,33 @@
+<!-- extend from base1 layout -->
+{% extends "base1.html" %}
+{% block content %}
+<form action="" method="post" name="config">
+    {{form.hidden_tag()}}
+    <p>
+        Target temperature, C:<br>
+        {{form.temp_set(places=2, rounding=None, value=cfg.temp_set)}}<br>
+	{% for error in form.errors.temp_set %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+        Target temperature delta, C:<br>
+        {{form.temp_delta(places=2, rounding=None, value=cfg.temp_delta)}}<br>
+	{% for error in form.errors.temp_delta %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+        Valve work time, sec:<br>
+        {{form.valve_work(places=2, rounding=None, value=cfg.valve_work)}}<br>
+	{% for error in form.errors.valve_work %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+        Valve work time step, sec:<br>
+        {{form.valve_delta(places=2, rounding=None, value=cfg.valve_delta)}}<br>
+	{% for error in form.errors.valve_delta %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+    </p>
+    <p><input type="submit" value="Save & Apply"></p>
+    {% if success %}
+    <span style="color: green;">Apply successfuly!</span>
+    {% endif %}
+</form>
+{% endblock %}
